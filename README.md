@@ -91,3 +91,4 @@ I chose to develop Grool's Manor using Object Oriented Design in Python for a fe
 
 ## Lessons Learned
 <hr>
+The biggest takeaway from this project is the amount of time and planning that a game takes. I had always heard that games had a lot of moving parts, but I now know firsthand how much work is required to make a game from scratch. I've also discovered how fun they can be to make as well.
