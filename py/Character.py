@@ -56,7 +56,7 @@ class Character:
             if isinstance(item, Die):
                 vals.append(item.roll())
 
-        return vals
+        return max(vals) * self._damage
 
     # Abstract method
     def _die(self):

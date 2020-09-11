@@ -31,11 +31,11 @@ class Battle:
         # Check if this enemy gets to attack first
         if self._enemy.attacksFirst():
             print("Surprise Attack!")
-            attack = max(self._enemy.generate_attack())
-            attack = (attack * self._enemy.get_damage()) - self._player.get_armor()
-            if attack < 0:
-                attack = 0
-            print(f"A {self._enemy_name} {self._enemy.getAttack()} dealing {attack} damage!")
+            attack = self._enemy.generate_attack()
+            temp = (attack - self._player.get_armor())
+            if temp < 0:
+                temp = 0
+            print(f"A {self._enemy_name} {self._enemy.getAttack()} dealing {temp} damage!")
             
             # Check if the player died
             lived = self._player.receive_attack(attack)
@@ -60,20 +60,19 @@ class Battle:
 
                 if userInput in {'A', 'ATTACK'}:
                     attack = self._player.generate_attack()
-                    attack = max(attack)
-                    print(f"Your highest roll was a {attack}.")
-                    attack = (attack * self._player.get_damage()) - self._enemy.get_armor()
-                    if attack < 0:
-                        attack = 0
-                    print(f"Your attack does {attack} damage to the {self._enemy_name}")
+                    temp = (attack - self._enemy.get_armor())
+                    if temp < 0:
+                        temp = 0
+                    print(f"Your attack does {temp} damage to the {self._enemy_name}.")
                     
                     # Check if the enemy died
                     lived = self._enemy.receive_attack(attack)
                     if not lived:
+                        print(f"The {self._enemy_name} {self._enemy.getDeath()}.\n")
                         self._won = True
                         keepGoing = False
                     else:
-                        print(f"The {self._enemy_name} is now at {self._enemy.get_health()} HP")
+                        print(f"The {self._enemy_name} is now at {self._enemy.get_health()} HP.")
                     print()
                     break
                     
@@ -112,11 +111,11 @@ class Battle:
                 break
 
             # Enemy move
-            attack = max(self._enemy.generate_attack())
-            attack = (attack * self._enemy.get_damage()) - self._player.get_armor()
-            if attack < 0:
-                attack = 0
-            print(f"The {self._enemy_name} {self._enemy.getAttack()} dealing {attack} damage!")
+            attack = self._enemy.generate_attack()
+            temp = (attack - self._player.get_armor())
+            if temp < 0:
+                temp = 0
+            print(f"The {self._enemy_name} {self._enemy.getAttack()} dealing {temp} damage!")
             
             # Check if the player died
             lived = self._player.receive_attack(attack)
@@ -137,7 +136,7 @@ if __name__ == '__main__':
     monster = StatItem('Monster', 'Monster', 0, 0, 0)
 
     # Make enemy
-    enemy = EnemyCharacter('Baron', 50, 10, 3, 5, monster, True)
+    enemy = EnemyCharacter('Baron', 50, 3, 3, 5, monster, True)
     enemy.add_item(monster)
     enemy.add_item(die2)
 
@@ -146,7 +145,7 @@ if __name__ == '__main__':
     enemy.setDeath('wails in pain as it shrivels and dies')
 
     # Make player
-    player = PlayerCharacter(20, 10, 10)
+    player = PlayerCharacter(20, 3, 10)
     player.add_item(rageblade)
     player.add_item(die1)
 

@@ -65,6 +65,18 @@ class PlayerCharacter (Character):
             # Refill HP on level up
             self._health = self._max_health
 
+    def generate_attack(self):
+
+        # Go through each item in inventory and if its a die roll it and add to list of rolled dice. Select max.
+        vals = []
+        for item in self._inventory:
+            if isinstance(item, Die):
+                vals.append(item.roll())
+
+        print(f"You rolled the following values: {vals}")
+        attack = max(vals)
+        return attack * self._damage
+
     # Remove player's inventory and refill health
     def _die(self):
         
