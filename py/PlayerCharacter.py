@@ -1,7 +1,8 @@
 from Character import Character
-import math
 from Die import Die
-from StatItem import StatItem
+from StatItem import StatItem 
+
+import math
 
 class PlayerCharacter (Character):
 
@@ -9,14 +10,13 @@ class PlayerCharacter (Character):
         super().__init__(health, armor, damage, 1)
         self.__exp_needed = 2
 
-    def attempt_flee(self):
-        
-        # Roll each die and if a 2 is rolled then return true
+    def show_inventory(self):
+        print("You open your satchel to find the following items:\n")
         for item in self._inventory:
-            if isinstance(item, Die):
-                if (item.roll() == 2):
-                    return True
-        return False
+            print(f"{item.getName()} - {item.getDescription()}")
+
+    def get_exp(self):
+        return self.__exp_needed
 
     def add_exp(self, amount):
         self.__exp_needed -= amount
@@ -80,4 +80,15 @@ class PlayerCharacter (Character):
         self._health = self._max_health
 
         # Display death message
-        
+        print(
+"""You have been slain... Grool has feasted on your body and reanimated all of the beasts you had killed.
+The items you had collected have been returned to their original places, but your soul has been transferred
+from your old body to a new adventurer entering the manor. With your soul you bring with you all raw stats
+that you had prior to your death (no bonus stats from items).
+""")
+
+        print(
+f"""\nYou are still Level {self._level}, your Max HP is still {self._max_health}, your Armor Level is still {self._armor}, 
+and your Damage Level is still {self._damage}. Pick yourself up, and venture onwards to defeat Grool!
+""")
+

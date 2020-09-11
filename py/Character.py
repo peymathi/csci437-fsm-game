@@ -1,4 +1,4 @@
-from Die import Die
+from Die import Die 
 from StatItem import StatItem
 
 class Character:
@@ -12,9 +12,27 @@ class Character:
         self._level = level
         self._inventory = []
 
+    def get_armor(self):
+        return self._armor
+
+    def get_health(self):
+        return self._health
+
+    def get_max_health(self):
+        return self._max_health
+
+    def get_damage(self):
+        return self._damage
+
+    def get_level(self):
+        return self._level
+
     # Returns false if dead and true if still alive
     def receive_attack(self, attack):
-        self._health -= attack - self._armor
+        attack = attack - self._armor
+        if attack < 0:
+            attack = 0
+        self._health -= attack
         if self._health < 1:
             self._die()
             return False
@@ -38,8 +56,8 @@ class Character:
             if isinstance(item, Die):
                 vals.append(item.roll())
 
-        return max(vals)
+        return vals
 
     # Abstract method
     def _die(self):
-        print("ERROR! This character doesn't know how to DIE!")
+        raise Exception("Abstract method _die() called on Character class")
