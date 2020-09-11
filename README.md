@@ -4,7 +4,7 @@ Grool's Manor is a text-based game driven by a finite state machine. The game is
 
 
 ## Instructions to play:
-<hr>
+
 
 ### On IUPUI Tesla Shared Server:
 <br>
@@ -27,7 +27,7 @@ cd csci437-fsm-game.git
 ```
 
 ## Game Aspects
-<hr>
+
 
 Below are various aspects and systems of the game's top level design:
 
@@ -46,7 +46,7 @@ Below are various aspects and systems of the game's top level design:
 <br>
 
 ## Misc Parts of the Game
-<hr>
+
 
 - Enemies only respawn on death.
 - Some areas of the level allow the player to restore their HP to full.
@@ -55,7 +55,7 @@ Below are various aspects and systems of the game's top level design:
 <br>
 
 ## Object Oriented Design
-<hr>
+
 I chose to develop Grool's Manor using Object Oriented Design in Python for a few reasons. The first being that it is a comfort tool for me to use OOD and Python. The second being the extendability of OOD allowing me to potentially expand upon this game in the future. The final reason is that employers want to see OOD in projects of their candidates, and using it in this project allows me to showcase my OOD skills on my GitHub.
 
 <br/>Below is a brief description of some of the classes in order to showcase the OOD used in the game.
@@ -90,5 +90,5 @@ I chose to develop Grool's Manor using Object Oriented Design in Python for a fe
 <br>
 
 ## Lessons Learned
-<hr>
+
 The biggest takeaway from this project is the amount of time and planning that a game takes. I had always heard that games had a lot of moving parts, but I now know firsthand how much work is required to make a game from scratch. I've also discovered how fun they can be to make as well.
