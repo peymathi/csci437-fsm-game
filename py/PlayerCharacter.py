@@ -1,6 +1,7 @@
 from Character import Character
 import math
 from Die import Die
+from StatItem import StatItem
 
 class PlayerCharacter (Character):
 
@@ -63,3 +64,20 @@ class PlayerCharacter (Character):
 
             # Refill HP on level up
             self._health = self._max_health
+
+    # Remove player's inventory and refill health
+    def _die(self):
+        
+        # Remove stat bonuses
+        for item in self._inventory:
+            if isinstance(item, StatItem):
+                self._max_health -= item.health()
+                self._armor -= item.armor()
+                self._damage -= item.damage()
+
+        # Clear inventory
+        self._inventory = []
+        self._health = self._max_health
+
+        # Display death message
+        

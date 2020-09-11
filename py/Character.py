@@ -12,10 +12,13 @@ class Character:
         self._level = level
         self._inventory = []
 
+    # Returns false if dead and true if still alive
     def receive_attack(self, attack):
         self._health -= attack - self._armor
         if self._health < 1:
             self._die()
+            return False
+        return True
 
     def add_item(self, item):
 
@@ -26,7 +29,7 @@ class Character:
             self._damage += item.damage()
 
         self._inventory.append(item)
-        
+
     def generate_attack(self):
 
         # Go through each item in inventory and if its a die roll it and add to list of rolled dice. Select max.
