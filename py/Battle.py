@@ -69,6 +69,7 @@ class Battle:
                     lived = self._enemy.receive_attack(attack)
                     if not lived:
                         print(f"The {self._enemy_name} {self._enemy.getDeath()}.\n")
+                        self._player.add_exp(self._enemy.get_exp())
                         self._won = True
                         keepGoing = False
                     else:
@@ -76,7 +77,6 @@ class Battle:
                     print()
                     break
                     
-
                 elif userInput in {'F', 'FLEE'}:
                     vals = self._player.generate_attack()
                     print("You attempt to flee by trying to roll a 2.")
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     monster = StatItem('Monster', 'Monster', 0, 0, 0)
 
     # Make enemy
-    enemy = EnemyCharacter('Baron', 50, 3, 3, 5, monster, True)
+    enemy = EnemyCharacter('Baron', 50, 3, 3, 5, monster, 30, True)
     enemy.add_item(monster)
     enemy.add_item(die2)
 

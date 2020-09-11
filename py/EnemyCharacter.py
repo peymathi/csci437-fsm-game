@@ -3,17 +3,27 @@ from Item import Item
 
 class EnemyCharacter (Character):
 
-    def __init__(self, name, health, armor, damage, level, item, first):
+    def __init__(self, name, health, armor, damage, level, item, exp, first):
         super().__init__(health, armor, damage, level)
         
         # Item given to the player on death
-        self._name = name
         self._item_to_drop = item
-        self._attacks_first = first
 
+        # Bool to determine if the enemy will surprise attack
+        self._attacks_first = first
+        
+        # Amount of exp that the player will get on death
+        self._exp = exp
+
+        self._name = name
+
+        # Various messages that the enemy will display
         self._attack_msg = ''
         self._flee_block_msg = ''
         self._death_msg = ''
+    
+    def getExp(self):
+        return self._exp
 
     def getName(self):
         return self._name
