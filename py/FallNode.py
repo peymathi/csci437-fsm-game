@@ -1,11 +1,12 @@
 from OneWayNode import OneWayNode
 
 # Identical to the OneWayNode except that this node takes away some health from the user from the fall
+# and then immediately sends the player to another node
 class FallNode (OneWayNode):
 
-    def __init__(self, player, nextNodes, message, options, fallDamage, enemy = None, item = None):
-        super().__init__(player, nextNodes, message, options, enemy = None, item = None)
-
+    def __init__(self, player, fallDamage, nextNode):
+        super().__init__(player, [], '', [], None, None)
+        self._next_node = nextNode
         self._fall_damage = fallDamage
 
     def _init_room(self):
@@ -16,4 +17,4 @@ class FallNode (OneWayNode):
         else:
             print("You fall through a hole in the floor to a couple levels down. You have an intense headache now and you lose 10 HP.")
 
-        print(self._message)
+        

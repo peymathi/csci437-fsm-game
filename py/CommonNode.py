@@ -19,18 +19,23 @@ class CommonNode (Node):
         self._has_fleed = False
         self._has_lost = False
 
+        # Previous node
+        self._prev_node = None
+
     def evaluate(self, prevNode: Node = None):
         
+        self._prev_node = prevNode
+
         # Modularization of this method into different methods to allow subclasses of this class to
         # customize individual parts of this method
         self._init_room()
         self._encounter_enemy()
         if (self._has_fleed):
-            return prevNode.evaluate(self)
+            return self._prev_node.evaluate(self)
         elif (self._has_lost):
             return False    
         self._give_item()
-        return self._choose_next(prevNode)
+        return self._choose_next()
 
     def _init_room(self):
         print(self._message)
@@ -62,9 +67,9 @@ class CommonNode (Node):
             elif battle.lost():
                 self._has_lost = True
 
-    def _choose_next(self, prevNode):
+    def _choose_next(self):
         
-        # Loop until the user selects an option
+        # Loop until the user leaves the node
         while True:
 
             print("What would you like to do?\n")
@@ -91,8 +96,8 @@ class CommonNode (Node):
 
             except:
                 if userInput in {'V', 'VIEW', 'VIEW PLAYER STATS', 'VIEW STATS'}:
-                    pass
+                    self._player.show_inventory()
 
                 elif userInput in {'G', 'GO', 'GO BACK'}:
-                    return prevNode.evaluate(self)
+                    return self._prev_node.evaluate(self)
 

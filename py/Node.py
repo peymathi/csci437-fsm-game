@@ -24,5 +24,10 @@ class Node:
     # Returns false if the player has died. Returns true if the player wins the game.
     # Takes a reference to the last node the player was at.
     # Abstract method
-    def evaluate(self, prevNode: Node = None):
+    def evaluate(self, prevNode = None):
         raise Exception("Abstract method evaluate() called on Node class")
+
+    # Allows for adding a new node after creation of the Node
+    def add_node(self, node, message):
+        self._next_nodes.append(node)
+        self._options.append(message)
