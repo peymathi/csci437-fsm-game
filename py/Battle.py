@@ -69,7 +69,7 @@ class Battle:
                     lived = self._enemy.receive_attack(attack)
                     if not lived:
                         print(f"The {self._enemy_name} {self._enemy.getDeath()}.\n")
-                        self._player.add_exp(self._enemy.get_exp())
+                        self._player.add_exp(self._enemy.getExp())
                         self._won = True
                         keepGoing = False
                     else:
@@ -149,11 +149,10 @@ if __name__ == '__main__':
     player.add_item(rageblade)
     player.add_item(die1)
 
-    # Make battle
-    battle = Battle(player, enemy)
-
     # Fight!
-    battle.start_battle()
+    for i in range(0, 5):
+        battle = Battle(player, enemy)
+        battle.start_battle()
 
     if battle.won():
         print("Player won")

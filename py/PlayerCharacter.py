@@ -43,7 +43,7 @@ class PlayerCharacter (Character):
         # Loop until user picks an attribute
         while(True):
             print("You've leveled up! Select an attribute to add a point into: ")
-            print("\t(h)ealth\t(a)rmor\t(d)amage\n")
+            print("\t(h)ealth \t (a)rmor \t (d)amage\n")
 
             userInput = input("User Input: ")
             userInput = userInput.upper().strip()
@@ -62,8 +62,8 @@ class PlayerCharacter (Character):
             else:
                 print ("\nInvalid User Input")
 
-            # Refill HP on level up
-            self._health = self._max_health
+        # Refill HP on level up
+        self._health = self._max_health
 
     def generate_attack(self):
 
