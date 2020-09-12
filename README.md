@@ -10,7 +10,7 @@ Grool's Manor is a text-based game driven by a finite state machine. The game is
 <br>
 
 ```
-cd /home/peymathi/gamedev/grools-manor/
+cd /home/peymathi/gamedev/grools-manor/py
 
 ./grools-manor
 ```
@@ -21,7 +21,7 @@ cd /home/peymathi/gamedev/grools-manor/
 ```
 git clone https://github.com/peymathi/csci437-fsm-game.git
 
-cd csci437-fsm-game.git
+cd csci437-fsm-game.git/py
 
 ./grools-manor
 ```
@@ -39,7 +39,7 @@ Below are various aspects and systems of the game's top level design:
 
 - **Dice:** The player starts with a die only containing 2 numbers: 1 and 2 (called coin). Over the course of the game the player can find more dice which can have different ranges of possible numbers and probabilities. When entering combat, all of the dice that the player currently has will be rolled and whichever die gives the highest result will be chosen to calculate the player's damage for that attack.
 
-- **Critical Strikes:** The player can perform a critical strike on an enemy by rolling a ten on any of the dice rolled. In this case, the player will deal 40% of the enemy's missing health OR normal damage depending on which is higher.
+- **Critical Strikes:** The player can perform a critical strike on an enemy by rolling a ten on any of the dice rolled. In this case, the player will deal 40% of the enemy's missing health OR normal damage depending on which is higher. **Not implemented**
 
 - **Player Death:** On death, the finite state machine is completely reset putting the player at the beginning of the game. In other words, the entire state of the game is set back to the game's start. All items, monsters, an doors are reset. The only thing that is kept on reset is the player's stats.
 
@@ -49,7 +49,7 @@ Below are various aspects and systems of the game's top level design:
 
 
 - Enemies only respawn on death.
-- Some areas of the level allow the player to restore their HP to full.
+- Some areas of the level allow the player to restore their HP to full. **Not implemented**
 - On any given turn, the player can choose to attempt to flee. In this case, all dice are rolled and if one of the dice comes up as a 2 then the player will successfully flee. Otherwise they forfeit their turn and the fight continues.
 
 <br>
@@ -91,4 +91,8 @@ I chose to develop Grool's Manor using Object Oriented Design in Python for a fe
 
 ## Lessons Learned
 
-The biggest takeaway from this project is the amount of time and planning that a game takes. I had always heard that games had a lot of moving parts, but I now know firsthand how much work is required to make a game from scratch. I've also discovered how fun they can be to make as well.
+The biggest takeaway from this project is the amount of time and planning that a game takes. I had always heard that games had a lot of moving parts, but I now know firsthand how much work is required to make a game from scratch. In future game development projects I need to work on building simple games or even demos and expand them into more complex games. I had several very cool ideas for this game, but ended up having to shrink it down immensely with the time alloted for developement. The map went from about 60 nodes down to just over 10. Several features had to be cut out for time. These features and the full map may be implemented in the future though. 
+
+## Gameplay Balance
+
+The game in its current state of balance is a bit grindy. Idealy the player should be able to make it through the game without having to grind EXP, I just need to tweak some of the values for enemies exp yields, damage, hp, etc. One positive of the heavily RNG based combat is the ability for the player to go on "God runs". When testing I was able to make it through about 5 rooms on one of my third or fourth lives. However, I would not make it to back to this point until around my twentieth or so life. At the same time, there were lives that ended at only the second room at the 30+ life mark soley due to RNG. Obviously this is highly unbalanced, but makes for interesting gameplay nevertheless. It keeps the player on their toes because they never know just how far they could get, or just how short their life could be. Leveling up improves your odds of making it farther, but it is completely possible to get one shot surprise attacked by the second enemy even 30+ lives in. Overall, if the player can sit through the repetetive grind of leveling up their raw stats, they will inevitably beat the game eventually due to the player's infinite scaling and the enemies static combat values. If you are playing the game in its current unbalanced state, and you have no patience to grind and you would like to see the end of the game, open the GraphBuilder.py file. You are free to change all of the values for yourself, items, and enemies there to how you like so you can see the end of the game.
