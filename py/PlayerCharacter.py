@@ -69,11 +69,10 @@ class PlayerCharacter (Character):
 
             elif userInput in {'D', 'DAMAGE'}:
                 self._damage += 1
+                break
 
             else:
                 print ("\nInvalid User Input")
-
-            
 
         # Refill HP on level up
         self._health = self._max_health

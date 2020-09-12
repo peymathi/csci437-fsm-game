@@ -88,13 +88,16 @@ class CommonNode (Node):
             try:
                 userInput = int(userInput)
                 userInput -= 1
-                
-                return self._next_nodes[userInput].evaluate(self)
 
+                if userInput > -1 and userInput < len(self._options):
+                    return self._next_nodes[userInput].evaluate(self)
+                else:
+                    print("I dont know what you want to do...")
+            
             except KeyboardInterrupt:
                 raise KeyboardInterrupt
 
-            except:
+            except ValueError:
                 if userInput in {'V', 'VIEW', 'VIEW PLAYER STATS', 'VIEW STATS'}:
                     self._player.show_inventory()
                     

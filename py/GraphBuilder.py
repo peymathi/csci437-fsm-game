@@ -12,7 +12,7 @@ class GraphBuilder:
     def __init__(self):
         
         self._start_node = None
-        self._player = PlayerCharacter(5, 0, 1)
+        self._player = PlayerCharacter(20, 0, 1)
 
     def get_start(self):
         return self._start_node
@@ -44,6 +44,19 @@ class GraphBuilder:
         giantSpider = EnemyCharacter("Giant Spider", 35, 10, 7, 30, None, 64, False)
         baronNashor = EnemyCharacter("Baron Nashor (Giant Worm)", 50, 20, 10, 100, muramasa, 200, False)
         dragon = EnemyCharacter("Fire Breathing Dragon", 30, 10, 20, 100, None, 200, False)
+
+        # Give enemies dice
+        grool.add_item(monsterDie)
+        zombie.add_item(monsterDie)
+        piano.add_item(monsterDie)
+        demon.add_item(monsterDie)
+        skeleton.add_item(monsterDie)
+        wolves.add_item(monsterDie)
+        executioner.add_item(monsterDie)
+        giantSpider.add_item(monsterDie)
+        baronNashor.add_item(monsterDie)
+        dragon.add_item(monsterDie)
+
         
         # give enemies attack, flee, and death messages
         grool.setAttack("steals your life essence from you")

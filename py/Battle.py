@@ -75,14 +75,15 @@ class Battle:
                     if not lived:
                         print(f"The {self._enemy_name} {self._enemy.getDeath()}.")
                         self._player.add_exp(self._enemy.getExp())
-                        self._player.add_item(self._enemy.getItem())
+                        if self._enemy.getItem() is not None:
+                            self._player.add_item(self._enemy.getItem())
                         self._won = True
                         keepGoing = False
                     else:
                         print(f"The {self._enemy_name} is now at {self._enemy.get_health()} HP.")
                     
                     break
-                    
+
                 elif userInput in {'F', 'FLEE'}:
                     vals = self._player.roll_dice()
                     print("You attempt to flee by trying to roll a 2.")
