@@ -12,7 +12,7 @@ class GraphBuilder:
     def __init__(self):
         
         self._start_node = None
-        self._player = PlayerCharacter(20, 0, 1)
+        self._player = PlayerCharacter(25, 0, 1)
 
     def get_start(self):
         return self._start_node
@@ -113,7 +113,7 @@ class GraphBuilder:
 
         preboss = CommonNode(self._player, "You cautiously step into room with your shield up and weapons drawn. To your surprise there is nothing but a small fountain here. There isn't any water flowing and there is a small plaque on the front of the fountain. How strange. What was supposed to be here? You hear the sorcerer Grool laughing loudly nearby.", None, critical)
 
-        boss = EndNode(self._player, "You enter a room with purple carpet and green flames at the edges of the room. Grool is turned with his back to you looking down at an alter. He's still laughing... you take two steps near him and he turns around revealing his burning orange eyes. You pull out your dice, ready to defeat Grool.", grool)
+        boss = EndNode(self._player, "You enter a room with purple carpet and green flames at the edges of the room. Grool is turned with his back to you looking down at an altar. He's still laughing... you take two steps near him and he turns around revealing his burning orange eyes. You pull out your dice, ready to defeat Grool.", grool)
 
         # Link them together
         start.add_node(first, 'Enter the door to the East.')

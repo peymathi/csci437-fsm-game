@@ -60,15 +60,15 @@ class PlayerCharacter (Character):
             userInput = userInput.upper().strip()
 
             if userInput in {'H', 'HP', 'HEALTH'}:
-                self._max_health += 1
+                self._max_health += 5
                 break
 
             elif userInput in {'A', 'ARMOR'}:
-                self._armor += 1
+                self._armor += 5
                 break
 
             elif userInput in {'D', 'DAMAGE'}:
-                self._damage += 1
+                self._damage += 5
                 break
 
             else:
