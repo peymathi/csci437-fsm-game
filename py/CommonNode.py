@@ -6,8 +6,8 @@ from Battle import Battle
 # Node representing the common formula for a Node. Almost every Node be an instance of this class or derive from this class
 class CommonNode (Node):
 
-    def __init__(self, player, nextNodes, message, options, enemy = None, item = None):
-        super().__init__(player, nextNodes, message, options)
+    def __init__(self, player, message, enemy = None, item = None):
+        super().__init__(player, message)
 
         # Item found in the room
         self._item = item
@@ -99,5 +99,8 @@ class CommonNode (Node):
                     self._player.show_inventory()
 
                 elif userInput in {'G', 'GO', 'GO BACK'}:
-                    return self._prev_node.evaluate(self)
+                    if self._prev_node is not None:
+                        return self._prev_node.evaluate(self)
+                    else:
+                        print("You cannot go back here.")
 
