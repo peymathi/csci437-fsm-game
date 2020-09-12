@@ -1,3 +1,6 @@
 #!/usr/bin/env python
 
-print("test")
+import py.Game
+
+s
+input("Press enter to exit...")
