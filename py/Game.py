@@ -1,14 +1,15 @@
 from GraphBuilder import GraphBuilder
 from Node import Node
-from PlayerCharacter import PlayerCharacter
 
 class Game:
     
     def __init__(self):
-        pass
+        self._builder = GraphBuilder()
 
     # Build graph and evaluate the starting node
     def start(self):
+        
+        # Add game menu here
         pass
     
     # Rebuild graph and evaluate the starting node

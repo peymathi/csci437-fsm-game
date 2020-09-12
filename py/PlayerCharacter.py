@@ -11,9 +11,14 @@ class PlayerCharacter (Character):
         self.__exp_needed = 2
 
     def show_inventory(self):
+        self.print_stats()
         print("You open your satchel to find the following items:\n")
         for item in self._inventory:
-            print(f"{item.getName()} - {item.getDescription()}")
+            if isinstance(item, StatItem):
+                print(f"{item.getName()} - {item.getDescription()} + {item.health()} HP {item.armor()} Armor {item.damage()} Damage")
+
+            elif isinstance(item, Die):
+                print(f"{item.getName()} - {item.getDescription()} - Can roll the following numbers: {item.get_values()}")
 
     def get_exp(self):
         return self.__exp_needed
@@ -22,26 +27,32 @@ class PlayerCharacter (Character):
         self.__exp_needed -= amount
 
         # Check if player has leveled up leveled up
-        if self.__exp_needed < 1:
+        while (True):
+            if self.__exp_needed < 1:
 
-            # Set the next value for exp needed to level up. Next exp_needed value is determined by 2^current_level
-            # unless the current level is greater than 6. After that point the next exp_needed value is determined by
-            # 2^6 + 32 times however many levels past 6 the player is.
-            temp = self.__exp_needed
-            if self._level > 6:
-                self.__exp_needed = math.pow(2, 6) + (self._level - 6) * 32
-                self.__exp_needed += temp
+                # Set the next value for exp needed to level up. Next exp_needed value is determined by 2^current_level
+                # unless the current level is greater than 6. After that point the next exp_needed value is determined by
+                # 2^6 + 32 times however many levels past 6 the player is.
+                temp = self.__exp_needed
+                self._level += 1
+                if self._level > 6:
+                    self.__exp_needed = math.pow(2, 6) + (self._level - 6) * 32
+                    self.__exp_needed += temp
 
+                else:
+                    self.__exp_needed = math.pow(2, self._level)
+                    self.__exp_needed += temp
+                    self.__exp_needed = int(self.__exp_needed)
+                
+                self._level_up()
             else:
-                self.__exp_needed = math.pow(2, self._level)
-                self.__exp_needed += temp
-            
-            self._level_up()
+                break
 
     def _level_up(self):
         
         # Loop until user picks an attribute
         while(True):
+            print('\n-------------------------------------------------------------------------------------------------------------------------------------\n')
             print("You've leveled up! Select an attribute to add a point into: ")
             print("\t(h)ealth \t (a)rmor \t (d)amage\n")
 
@@ -62,20 +73,44 @@ class PlayerCharacter (Character):
             else:
                 print ("\nInvalid User Input")
 
+            
+
         # Refill HP on level up
         self._health = self._max_health
 
+        self.print_stats()
+
+    def print_stats(self):
+        print("Player Stats:")
+        print(f"\t HP: {self._health} / {self._max_health} \t Armor: {self._armor} \t Damage: {self._damage} \t Level: {self._level} \t Exp Needed: {self.__exp_needed}")
+
+    def add_item(self, item):
+
+        # Add stats to character if necessary
+        if isinstance(item, StatItem):
+            self._max_health += item.health()
+            self._armor += item.armor()
+            self._damage += item.damage()
+
+        self._inventory.append(item)
+        print("*You found a new item!*")
+        print(f"{item.getName()} added to satchel.")
+
     def generate_attack(self):
+
+        vals = self.roll_dice()
+        print(f"You rolled the following values: {vals}")
+        attack = max(vals)
+        return attack * self._damage
+
+    def roll_dice(self):
 
         # Go through each item in inventory and if its a die roll it and add to list of rolled dice. Select max.
         vals = []
         for item in self._inventory:
             if isinstance(item, Die):
                 vals.append(item.roll())
-
-        print(f"You rolled the following values: {vals}")
-        attack = max(vals)
-        return attack * self._damage
+        return vals
 
     # Remove player's inventory and refill health
     def _die(self):

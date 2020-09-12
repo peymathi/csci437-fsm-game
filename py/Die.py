@@ -10,6 +10,9 @@ class Die (Item):
     def roll(self):
         return random.choice(self.__values)
 
+    def get_values(self):
+        return self.__values
+
 # Testing
 if __name__ == '__main__':
     test = Die("test", "test", [2, 3, 5, 6, 8])

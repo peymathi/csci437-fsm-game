@@ -71,15 +71,14 @@ class CommonNode (Node):
         
         # Loop until the user leaves the node
         while True:
-
+            print('\n-------------------------------------------------------------------------------------------------------------------------------------\n')
             print("What would you like to do?\n")
 
             # Give the options
-            print("", end='\t ')
             for i in range(len(self._options)):
                 print(f"{i+1}){self._options[i]}", end=' \t ')
 
-            print("(V)iew Player Stats \t (G)o Back\n")
+            print("(V)iew Player Stats \t (G)o Back \t (Q)uit\n")
 
             # Get user input and determine next node
             userInput = input("User Input: ")
@@ -89,6 +88,7 @@ class CommonNode (Node):
             try:
                 userInput = int(userInput)
                 userInput -= 1
+                
                 return self._next_nodes[userInput].evaluate(self)
 
             except KeyboardInterrupt:
@@ -97,10 +97,21 @@ class CommonNode (Node):
             except:
                 if userInput in {'V', 'VIEW', 'VIEW PLAYER STATS', 'VIEW STATS'}:
                     self._player.show_inventory()
+                    
 
                 elif userInput in {'G', 'GO', 'GO BACK'}:
                     if self._prev_node is not None:
                         return self._prev_node.evaluate(self)
+                        
                     else:
                         print("You cannot go back here.")
+                        
+                elif userInput in {'Q', 'QUIT'}:
+                    exit(1)
+
+                else:
+                    print("I dont know what you want to do...")
+                    
+
+
 

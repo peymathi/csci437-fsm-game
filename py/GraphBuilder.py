@@ -3,16 +3,18 @@ from Die import Die
 from StatItem import StatItem
 from EnemyCharacter import EnemyCharacter
 from CommonNode import CommonNode
-from OneWayNode import OneWayNode
-from DeadEndNode import DeadEndNode
 from FallNode import FallNode
 from PlayerCharacter import PlayerCharacter
 
 class GraphBuilder:
 
-    def __init__(self):
+    def __init__(self, player):
         
         self._start_node = None
+        self._player = PlayerCharacter(5, 0, 1)
+
+    def get_start(self):
+        return self._start_node
 
     def build_graph(self):
         
@@ -40,25 +42,31 @@ class GraphBuilder:
         enemy3.add_item(droppedStat)
 
         # Build the nodes
-        start = CommonNode(player, [], "Welcome to Groo's Manor.", [], None, coin)
+        start = CommonNode(player, "Welcome to Grool's Manor.", None, coin)
 
-        node2 = CommonNode(player, [start], "You are now in a large hallway.", ['Go through the south door'], enemy1, foundStat)
-        start.add_node(node2, 'Go through the north door')
+        node2 = CommonNode(player, "You are now in a large hallway.", enemy1, foundStat)
 
-        node3 = CommonNode(player, [start], 'You are now in a small parlor with a piano in the corner.', ['Go through the west door'], enemy2)
-        start.add_node(node3, 'Go through the east door')
+        node3 = CommonNode(player, 'You are now in a small parlor with a piano in the corner.', enemy2)
 
-        node4 = CommonNode(player, [start], 'You are now in a bathroom', ['Go through the east door'], enemy3, foundDie)
-        start.add_node(node4, 'Go through the west door')
+        node4 = CommonNode(player, 'You are now in a bathroom', enemy3, foundDie)
+        
 
         # Link them together
+        start.add_node(node3, 'Go through the east door')
+        start.add_node(node2, 'Go through the north door')
+        start.add_node(node4, 'Go through the west door')
 
+        node2.add_node(start, 'Go through the South door')
+        node3.add_node(start, 'Go through the West door')
+        node4.add_node(start, 'Go through the East door')
+
+        self._start_node = start
         # Call eval on start node
-        result = start.evaluate()
-        if result:
-            print("Player Won")
-        else:
-            print("Player lost")
+        # result = start.evaluate()
+        # if result:
+        #     print("Player Won")
+        # else:
+        #     print("Player lost")
 
 if __name__ == '__main__':
     builder = GraphBuilder()

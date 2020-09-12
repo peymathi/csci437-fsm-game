@@ -28,6 +28,9 @@ class Battle:
 
     def start_battle(self):
 
+        # Tell the player they are fighting
+        print(f"A {self._enemy_name} begins to fight you.")
+
         # Check if this enemy gets to attack first
         if self._enemy.attacksFirst():
             print("Surprise Attack!")
@@ -41,9 +44,11 @@ class Battle:
             lived = self._player.receive_attack(attack)
             if not lived:
                 self._lost = True
+                
                 return
 
             print(f"You are now at {self._player.get_health()} HP.")
+            
 
         # Loop until battle is over
         keepGoing = True
@@ -52,7 +57,7 @@ class Battle:
             # Player move
             # Loop until user chooses move
             while True:
-                
+                print('\n-------------------------------------------------------------------------------------------------------------------------------------\n')
                 print("It is your move. What would you like to do?")
                 print("(A)ttack \t (I)nspect Enemy \t (F)lee \t (V)iew Inventory")
                 userInput = input("\nUser Input: ")
@@ -68,43 +73,45 @@ class Battle:
                     # Check if the enemy died
                     lived = self._enemy.receive_attack(attack)
                     if not lived:
-                        print(f"The {self._enemy_name} {self._enemy.getDeath()}.\n")
+                        print(f"The {self._enemy_name} {self._enemy.getDeath()}.")
                         self._player.add_exp(self._enemy.getExp())
+                        self._player.add_item(self._enemy.getItem())
                         self._won = True
                         keepGoing = False
                     else:
                         print(f"The {self._enemy_name} is now at {self._enemy.get_health()} HP.")
-                    print()
+                    
                     break
                     
                 elif userInput in {'F', 'FLEE'}:
-                    vals = self._player.generate_attack()
+                    vals = self._player.roll_dice()
                     print("You attempt to flee by trying to roll a 2.")
-                    print(f"You throw your dice hoping for the best and end up with {[i for i in vals]} values with your dice.")
+                    print(f"You throw your dice hoping for the best and end up with the following values: {[i for i in vals]}")
                     
                     # If the player successfully fleed
                     if 2 in vals:
-                        print("You get lucky with a 2 and successfully flee.\n")
+                        print("You get lucky with a 2 and successfully flee.")
+                        
                         self._fleed = True
                         keepGoing = False
                         break
 
                     else:
                         print(f"Despite your best efforts, a 2 was not found among your dice rolls. The {self._enemy_name} {self._enemy.getFlee()}.")
-                        print()
+                        
                     break
 
                 elif userInput in {'V', 'VIEW', 'VIEW INVENTORY'}:
                     self._player.show_inventory()
-                    print()
+                    
                 
                 elif userInput in {'I', 'INSPECT', 'INSPECT ENEMY'}:
                     print(f"You are fighting what appears to be a {self._enemy_name}.")
                     print(f"The {self._enemy_name} has {self._enemy.get_health()} HP, {self._enemy.get_armor()} Armor, {self._enemy.get_damage()} Damage, and is Level {self._enemy.get_level()}.")
-                    print()
 
                 else:
-                    print("I don't know what you want to do...\n")
+                    print("I don't know what you want to do...")
+                    
 
             # Check if player move ended the battle
             if not keepGoing:
@@ -123,7 +130,7 @@ class Battle:
                 self._lost = True
                 return
 
-            print(f"You are now at {self._player.get_health()} HP.\n")
+            print(f"You are now at {self._player.get_health()} HP.")
 
 # Testing
 if __name__ == '__main__':
